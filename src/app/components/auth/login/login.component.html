@@ -1,12 +1,12 @@
 <section class="login-section">
     <h1>Login</h1>
-    <form class="login-form">
+    <form class="login-form" (ngSubmit)="onLogin()">
         <div class="inputs-container">
-            <input type="text" name="username">
-            <input type="password" name="password">
+            <input type="text" name="username" [(ngModel)]="username" required>
+            <input type="password" name="password" [(ngModel)]="password">
         </div>
         <div class="login-btn-container">
-            <button>Login</button>
+            <button type="submit">Login</button>
         </div>
     </form>
 </section>
