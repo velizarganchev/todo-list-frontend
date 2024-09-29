@@ -71,14 +71,14 @@
     }
 }
 
-
 .side-bar {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
     gap: 103px;
     position: fixed;
-    width: 232px;
+    width: fit-content;
     height: 100vh;
     left: 0px;
     top: 0px;
@@ -94,6 +94,7 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        width: fit-content;
         height: 65%;
 
         .nav-items-container {
@@ -109,7 +110,6 @@
                 color: #CDCDCD;
                 padding: 8px 57px;
                 gap: 20px;
-                width: 232px;
                 height: 54px;
                 text-decoration: none;
 

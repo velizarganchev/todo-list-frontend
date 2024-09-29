@@ -1,0 +1,23 @@
+<div class="card-container" (click)="openTask()" draggable="true" (dragstart)="startDragging(cardId)" id="cardId">
+    <div class="card">
+        <button class="card-label">category</button>
+        <h3 class="card-title">title</h3>
+        <p class="card-content">description</p>
+
+        <div id="'progress' + task.id" class="progress-bar-container">
+            <div class="progress-bar">
+                <div class="progress-done" id="'progress' + task.id"></div>
+            </div>
+            <p class="subtasks-container">Subtasks Progress/4 Subtasks</p>
+        </div>
+
+        <div class="card-footer">
+            <div class="profiles" id="'tasksProfiles' + task.id">
+                Profils
+            </div>
+            <div class="priority-container">
+                Icon
+            </div>
+        </div>
+    </div>
+</div>
