@@ -9,12 +9,28 @@ import { lastValueFrom } from 'rxjs';
 export class UsersService {
   constructor(private http: HttpClient) {}
 
-  async logInWithUsernameAndPassword(username: string, password: string) {
-    const url = environment.baseUrl + '/login/';
+  async logInWithUsernameAndPassword(data: {
+    username: string;
+    password: string;
+  }): Promise<{ token: string; user_id: number; email: string }> {
+    const url = `${environment.baseUrl}/auth/`;
     const body = {
-      username: username,
-      password: password,
+      action: 'login',
+      username: data.username,
+      password: data.password,
     };
-    return lastValueFrom(this.http.post(url, body));
+
+    try {
+      const response = await lastValueFrom(
+        this.http.post<{ token: string; user_id: number; email: string }>(
+          url,
+          body
+        )
+      );
+      return response;
+    } catch (error) {
+      console.error('Fehler bei der Authentifizierung:', error);
+      throw error;
+    }
   }
 }
