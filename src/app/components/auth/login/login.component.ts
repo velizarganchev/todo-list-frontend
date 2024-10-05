@@ -15,6 +15,7 @@ export class LoginComponent {
   constructor(private us: UsersService) {}
 
   loginData = {
+    action: 'login',
     username: '',
     password: '',
   };
@@ -23,7 +24,7 @@ export class LoginComponent {
     if (ngForm.submitted && ngForm.form.valid) {
       try {
         const res: { token: string; user_id: number; email: string } =
-          await this.us.logInWithUsernameAndPassword(this.loginData);
+          await this.us.SignInSignUpWithUsernameAndPassword(this.loginData);
         localStorage.setItem('AuthToken', res.token);
         ngForm.resetForm();
       } catch (error) {

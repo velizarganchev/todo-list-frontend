@@ -7,22 +7,29 @@ import { lastValueFrom } from 'rxjs';
   providedIn: 'root',
 })
 export class UsersService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  async logInWithUsernameAndPassword(data: {
-    username: string;
-    password: string;
-  }): Promise<{ token: string; user_id: number; email: string }> {
+  async SignInSignUpWithUsernameAndPassword(data: any): Promise<any> {
     const url = `${environment.baseUrl}/auth/`;
-    const body = {
-      action: 'login',
-      username: data.username,
-      password: data.password,
-    };
 
+    let body = {};
+    if (data.action === 'login') {
+      body = {
+        action: data.action,
+        username: data.username,
+        password: data.password,
+      };
+    } else if (data.action === 'register') {
+      body = {
+        action: data.action,
+        username: data.username,
+        email: data.email,
+        password: data.password,
+      };
+    }
     try {
-      const response = await lastValueFrom(
-        this.http.post<{ token: string; user_id: number; email: string }>(
+      const response: any = await lastValueFrom(
+        this.http.post(
           url,
           body
         )

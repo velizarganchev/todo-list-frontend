@@ -5,3 +5,8 @@ body {
   padding: 0;
   font-family: inter, sans-serif;
 }
+
+.disabled-button {
+  opacity: 0.8;
+  pointer-events: none;
+}
