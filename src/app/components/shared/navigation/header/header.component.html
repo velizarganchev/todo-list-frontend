@@ -1,27 +1,16 @@
 <header class="header">
   <span class="title">Kanban Project Management Tool</span>
-  <a href="#"
-    ><img
-      id="responsiveJoinLogoDark"
-      src="/assets/img/join-logo-dark-responsive.png"
-      alt="join logo"
-  /></a>
+  <a href="#"><img id="responsiveJoinLogoDark" src="/assets/img/join-logo-dark-responsive.png" alt="join logo" /></a>
   <div class="header-icons">
-    <a id="help" class="scale-on-hover" href="#"
-      ><img src="/assets/img/question-mark-icon.png"
-    /></a>
-    <img
-      class="scale-on-hover"
-      src="/assets/img/guest-profile-icon.png"
-      onclick="toggleClass('profile-nav-wrapper', 'hide')"
-    />
+    <a id="help" class="scale-on-hover" href="#"><img src="/assets/img/question-mark-icon.png" /></a>
+    <img class="scale-on-hover" src="/assets/img/guest-profile-icon.png" (click)="ToggleMenu()" />
   </div>
 </header>
 
-<!-- <div id="profile-nav-wrapper" class="hide" onclick="toggleClass('profile-nav-wrapper', 'hide')">
-    <div class="profile-nav">
-        <a href="#" onclick="toggleClass('profile-nav-wrapper', 'hide')">Legal notice</a> <br>
-        <a href="#" onclick="toggleClass('profile-nav-wrapper', 'hide')">Privacy policy</a> <br>
-        <a href="#" onclick="logOut()">Log out</a>
-    </div>
-</div> -->
+<div *ngIf="showHideMenu" id="profile-nav-wrapper" (click)="ToggleMenu()">
+  <div class="profile-nav">
+    <a href="#">Legal notice</a> <br>
+    <a href="#">Privacy policy</a> <br>
+    <a href="#" (click)="onLogout()">Log out</a>
+  </div>
+</div>

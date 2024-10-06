@@ -1,16 +1,17 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { lastValueFrom } from 'rxjs';
+import { lastValueFrom, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UsersService {
+  url = `${environment.baseUrl}auth/`;
+
   constructor(private http: HttpClient) { }
 
   async SignInSignUpWithUsernameAndPassword(data: any): Promise<any> {
-    const url = `${environment.baseUrl}/auth/`;
 
     let body = {};
     if (data.action === 'login') {
@@ -30,7 +31,7 @@ export class UsersService {
     try {
       const response: any = await lastValueFrom(
         this.http.post(
-          url,
+          this.url,
           body
         )
       );
@@ -39,5 +40,18 @@ export class UsersService {
       console.error('Fehler bei der Authentifizierung:', error);
       throw error;
     }
+  }
+
+  Logout(): Observable<any> {
+    const token = localStorage.getItem('AuthToken');
+    if (token) {
+      console.log(token);
+
+      const httpHeaders: HttpHeaders = new HttpHeaders({
+        Authorization: `Token ${token}`
+      });
+      return this.http.post(this.url, { action: 'logout' }, { headers: httpHeaders })
+    }
+    throw new Error('No AuthToken found');
   }
 }

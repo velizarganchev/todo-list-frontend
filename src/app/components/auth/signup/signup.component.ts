@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { UsersService } from '../users.service';
 import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -22,13 +22,10 @@ export class SignupComponent {
     privacyPolicy: false
   };
 
-  constructor(private us: UsersService) { }
+  constructor(private us: UsersService, private router: Router) { }
 
   async onSignUp(ngForm: NgForm) {
-    console.log('Form valid:', ngForm.valid);
-    console.log('Form values:', this.signUpData);
     if (ngForm.valid && this.signUpData.password === this.signUpData.confirmPassword) {
-      console.log('Form is valid and passwords match.');
       try {
         const res: {
           user_id: number,
@@ -39,7 +36,7 @@ export class SignupComponent {
           await this.us.SignInSignUpWithUsernameAndPassword(this.signUpData);
         localStorage.setItem('AuthToken', res.token);
         console.log(res);
-
+        this.router.navigate(['/login']);
         ngForm.resetForm();
       } catch (error) {
         this.handleError(error);

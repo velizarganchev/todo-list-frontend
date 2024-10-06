@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { UsersService } from '../users.service';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
-  constructor(private us: UsersService) {}
+  constructor(private us: UsersService, private router: Router) { }
 
   loginData = {
     action: 'login',
@@ -26,7 +26,9 @@ export class LoginComponent {
         const res: { token: string; user_id: number; email: string } =
           await this.us.SignInSignUpWithUsernameAndPassword(this.loginData);
         localStorage.setItem('AuthToken', res.token);
+        console.log(res);
         ngForm.resetForm();
+        this.router.navigate(['/']);
       } catch (error) {
         this.handleError(error);
       }
