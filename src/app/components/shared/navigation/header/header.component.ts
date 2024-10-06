@@ -19,7 +19,6 @@ export class HeaderComponent {
     this.showHideMenu = !this.showHideMenu;
   }
 
-
   onLogout() {
     this.us.Logout().subscribe({
       next: (response) => {

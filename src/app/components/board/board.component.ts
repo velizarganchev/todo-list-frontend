@@ -1,5 +1,6 @@
 import { Component, ElementRef, Renderer2 } from '@angular/core';
 import { CardComponent } from "../card/card.component";
+import { TasksService } from '../../tasks-service/tasks.service';
 
 @Component({
   selector: 'app-board',
@@ -9,7 +10,7 @@ import { CardComponent } from "../card/card.component";
   styleUrl: './board.component.scss'
 })
 export class BoardComponent {
-  constructor(private renderer: Renderer2, private el: ElementRef) { }
+  constructor(private renderer: Renderer2, private el: ElementRef, private tkService: TasksService) { }
 
   allowDrop(event: DragEvent) {
     event.preventDefault();
