@@ -30,20 +30,20 @@ export class Task {
         this.subtasks = obj?.subtasks ? obj.subtasks.map((s: any) => new Subtask(s)) : [];
     }
 
-    toJson() {
-        return {
-            id: this.id,
-            title: this.title,
-            category: this.category,
-            description: this.description,
-            status: this.status,
-            color: this.color,
-            priority: this.priority,
-            members: this.members.map(m => m.toJson()),
-            created_at: this.created_at,
-            due_date: this.due_date,
-            checked: this.checked,
-            subtasks: this.subtasks.map(s => s.toJson())
-        };
-    }
+    // toJson() {
+    //     return {
+    //         id: this.id,
+    //         title: this.title,
+    //         category: this.category,
+    //         description: this.description,
+    //         status: this.status,
+    //         color: this.color,
+    //         priority: this.priority,
+    //         members: this.members.map(m => m.toJson()),
+    //         created_at: this.created_at,
+    //         due_date: this.due_date,
+    //         checked: this.checked,
+    //         subtasks: this.subtasks.map(s => s.toJson())
+    //     };
+    // }
 }

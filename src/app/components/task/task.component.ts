@@ -1,13 +1,13 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-card',
+  selector: 'app-task',
   standalone: true,
   imports: [],
-  templateUrl: './card.component.html',
-  styleUrl: './card.component.scss'
+  templateUrl: './task.component.html',
+  styleUrl: './task.component.scss'
 })
-export class CardComponent {
+export class TaskComponent {
 
   @Input() cardId: string = '';
   @Input() task: any;

@@ -3,7 +3,7 @@
         <div class="board-header-container">
             <div class="board-title">
                 <h1>Board</h1>
-                <button onclick="openAddTask('')" class="add-task-rsponsive-btn">
+                <button (click)="openAddTask('')" class="add-task-rsponsive-btn">
                     <img src="../assets/img/board/plus-add-task-mobile.svg" alt="Plus">
                 </button>
             </div>
@@ -15,72 +15,74 @@
                         <img src="../assets/img/board/search.svg" alt="Search">
                     </button>
                 </form>
-                <button href="/html/add_task.html" class="add-task-button" onclick="openAddTask('')">Add task <img
+                <button href="/html/add_task.html" class="add-task-button" (click)="openAddTask('')">Add task <img
                         src="../assets/img/board/add.svg" alt=""></button>
             </div>
         </div>
-        <div class="board-nav-bar-container">
+        <!-- <div class="board-nav-bar-container">
             <div class="board-nav-item">
                 <span>To do</span>
-                <button onclick="openAddTask('todo')">
+                <button (click)="openAddTask('todo')">
                     <img src="../assets/img/board/plus-button.svg" alt="Plus">
                 </button>
             </div>
             <div class="board-nav-item">
                 <span>In progress</span>
-                <button onclick="openAddTask('in-progress')">
+                <button (click)="openAddTask('in-progress')">
                     <img src="../assets/img/board/plus-button.svg" alt="">
                 </button>
             </div>
             <div class="board-nav-item">
                 <span>Await feedback</span>
-                <button onclick="openAddTask('await-feedback')">
+                <button (click)="openAddTask('await-feedback')">
                     <img src="../assets/img/board/plus-button.svg" alt="">
                 </button>
             </div>
             <div class="board-nav-item">
                 <span>Done</span>
             </div>
-        </div>
+        </div> -->
     </div>
     <div class="board-distribution-container" id="board-distribution">
         <div class="responsive-board-nav-item-container">
             <div class="responsive-board-nav-item">
                 <span>To do</span>
-                <button onclick="openAddTask('todo')">
+                <button (click)="openAddTask('todo')">
                     <img src="../assets/img/board/plus-button.svg" alt="Plus">
                 </button>
             </div>
             <div class="board-distribution-colum" id="todo" (mouseleave)="removeHighlight('todo')"
                 (drop)="moveTo('todo')" (dragleave)="removeHighlight('todo')"
                 (dragover)="allowDrop($event); highlight('todo')">
-                <app-card />
+                @for (item of tskService.loadedTasks(); track $index) {
+                <app-task />
+                }
             </div>
         </div>
         <div class="responsive-board-nav-item-container">
             <div class="responsive-board-nav-item">
                 <span>In progress</span>
-                <button onclick="openAddTask('in-progress')">
+                <button (click)="openAddTask('in-progress')">
                     <img src="../assets/img/board/plus-button.svg" alt="Plus">
                 </button>
             </div>
             <div class="board-distribution-colum" id="in-progress" (mouseleave)="removeHighlight('in-progress')"
                 (drop)="moveTo('in-progress')" (dragleave)="removeHighlight('in-progress')"
                 (dragover)="allowDrop($event); highlight('in-progress')">
-                <app-card />
+                <app-task />
             </div>
         </div>
         <div class="responsive-board-nav-item-container">
             <div class="responsive-board-nav-item">
                 <span>Await feedback</span>
-                <button onclick="openAddTask('await-feedback')">
+                <button (click)="openAddTask('await-feedback')">
                     <img src="../assets/img/board/plus-button.svg" alt="Plus">
                 </button>
             </div>
             <div class="board-distribution-colum" id="await-feedback" (mouseleave)="removeHighlight('await-feedback')"
                 (drop)="moveTo('await-feedback')" (dragleave)="removeHighlight('await-feedback')"
                 (dragover)="allowDrop($event); highlight('await-feedback')">
-                <app-card />
+                <app-task />
             </div>
         </div>
         <div class="responsive-board-nav-item-container">
@@ -90,7 +92,7 @@
             <div class="board-distribution-colum" id="done" (mouseleave)="removeHighlight('done')"
                 (drop)="moveTo('done')" (dragleave)="removeHighlight('done')"
                 (dragover)="allowDrop($event); highlight('done')">
-                <app-card />
+                <app-task />
             </div>
         </div>
     </div>

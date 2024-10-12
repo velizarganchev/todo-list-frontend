@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { LoginComponent } from "./components/auth/login/login.component";
 import { HomeComponent } from "./components/home/home.component";
 import { NavigationComponent } from "./components/shared/navigation/navigation.component";
 import { HeaderComponent } from "./components/shared/navigation/header/header.component";
+import { TasksService } from './tasks-service/tasks.service';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,12 @@ import { HeaderComponent } from "./components/shared/navigation/header/header.co
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
-  title = 'todo-list-frontend';
+export class AppComponent implements OnInit {
+  title = 'Join';
+
+  private tskService = inject(TasksService);
+
+  ngOnInit(): void {
+    this.tskService.setAllTasks();
+  }
 }

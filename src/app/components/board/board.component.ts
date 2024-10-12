@@ -1,16 +1,31 @@
-import { Component, ElementRef, Renderer2 } from '@angular/core';
-import { CardComponent } from "../card/card.component";
+import { Component, ElementRef, inject, OnInit, Renderer2, signal } from '@angular/core';;
 import { TasksService } from '../../tasks-service/tasks.service';
+import { TaskComponent } from "../task/task.component";
+import { Task } from '../../models/task.class';
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CardComponent],
+  imports: [TaskComponent],
+  providers: [],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss'
 })
-export class BoardComponent {
-  constructor(private renderer: Renderer2, private el: ElementRef, private tkService: TasksService) { }
+
+export class BoardComponent implements OnInit {
+  tasks = signal<Task[] | undefined>([]);
+
+  public tskService = inject(TasksService);
+
+  constructor(private renderer: Renderer2, private el: ElementRef) { }
+
+  ngOnInit(): void {
+  }
+
+  openAddTask(status: string) {
+    console.log(status);
+
+  }
 
   allowDrop(event: DragEvent) {
     event.preventDefault();
