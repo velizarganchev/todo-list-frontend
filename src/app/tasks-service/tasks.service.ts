@@ -3,6 +3,7 @@ import { Task } from '../models/task.class';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { catchError, tap, throwError } from 'rxjs';
+import { ErrorService } from '../components/shared/error.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class TasksService {
   loadedTasks = this.tasks.asReadonly();
 
   http = inject(HttpClient);
+  errorService = inject(ErrorService);
 
   httpHeaders: HttpHeaders = new HttpHeaders({
     Authorization: `Token ${environment.baseToken}`
@@ -37,21 +39,27 @@ export class TasksService {
 
   addTask(taskData: Task) {
     return this.storeTask(taskData).pipe(tap({
-      next: () => this.tasks.update((oldTasks) => [...oldTasks!, taskData])
+      next: (response) => {
+        const prevTasks = this.tasks() || [];
+        if (!prevTasks.map(task => task.id === taskData.id)) {
+          this.tasks.set(response);
+        }
+      }
     }));
   }
 
   private storeTask(task: Task) {
-
     const newTask = {
       ...task,
       id: undefined,
       members: task.members.map(member => member.id)
     }
+    const prevTasks = this.tasks() || [];
 
-    return this.http.post<Task>(`${environment.baseUrl}/single-task/`, newTask, { headers: this.httpHeaders })
+    return this.http.post<Task[]>(`${environment.baseUrl}/single-task/`, newTask, { headers: this.httpHeaders })
       .pipe(catchError((error) => {
-        console.log(error);
+        this.errorService.showError('Something went wrong store the Task');
+        this.tasks.set(prevTasks);
         return throwError(() => new Error('Something went wrong store the Task'))
       }))
   }
@@ -64,8 +72,8 @@ export class TasksService {
   private update(task: Task) {
     return this.http.put<Task>(`${environment.baseUrl}/single-task/${task.id}/`, task, { headers: this.httpHeaders })
       .pipe(catchError((error) => {
-        console.log(error);
-        return throwError(() => new Error('Something went wrong delete the Task'))
+        this.errorService.showError('Something went wrong update the Task');
+        return throwError(() => new Error('Something went wrong update the Task'))
       }))
   }
 
@@ -79,7 +87,7 @@ export class TasksService {
   private delete(id: number) {
     return this.http.post<Task[]>(`${environment.baseUrl}/single-task/${id}/`, { headers: this.httpHeaders })
       .pipe(catchError((error) => {
-        console.log(error);
+        this.errorService.showError('Something went wrong delete the Task');
         return throwError(() => new Error('Something went wrong delete the Task'))
       }))
   }
