@@ -1,4 +1,13 @@
-import { Component, ElementRef, inject, OnInit, Renderer2, signal } from '@angular/core';;
+import {
+  Component,
+  DestroyRef,
+  ElementRef,
+  inject,
+  OnInit,
+  Renderer2,
+  signal
+} from '@angular/core';;
+
 import { TasksService } from '../../tasks-service/tasks.service';
 import { TaskComponent } from "../task/task.component";
 import { Task } from '../../models/task.class';
@@ -13,18 +22,35 @@ import { Task } from '../../models/task.class';
 })
 
 export class BoardComponent implements OnInit {
-  tasks = signal<Task[] | undefined>([]);
+  error = signal('');
+  isFetching = signal(false);
 
-  public tskService = inject(TasksService);
+  private tskService = inject(TasksService);
+  destroyRef = inject(DestroyRef);
+
+  tasks = this.tskService.loadedTasks;
 
   constructor(private renderer: Renderer2, private el: ElementRef) { }
 
   ngOnInit(): void {
+    this.isFetching.set(true);
+
+    const sub = this.tskService.loadAllTasks().subscribe({
+      error: (error: Error) => {
+        this.error.set(error.message);
+      },
+      complete: () => {
+        this.isFetching.set(false);
+      },
+    });
+
+    this.destroyRef.onDestroy(() => {
+      sub.unsubscribe();
+    })
   }
 
   openAddTask(status: string) {
     console.log(status);
-
   }
 
   allowDrop(event: DragEvent) {

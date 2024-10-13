@@ -1,4 +1,4 @@
-<div class="card-container" (click)="openTask()" draggable="true" (dragstart)="startDragging(cardId)" id="cardId">
+<div class="card-container" (click)="onAddTask()" draggable="true" (dragstart)="startDragging(taskId())" id="cardId">
     <div class="card">
         <button class="card-label">category</button>
         <h3 class="card-title">title</h3>

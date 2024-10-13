@@ -8,19 +8,10 @@ import { catchError, throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class StorageService {
-  http = inject(HttpClient);
 
-  httpHeaders: HttpHeaders = new HttpHeaders({
-    Authorization: `Token ${environment.baseToken}`
-  });
+  
 
   constructor() { }
 
-  fetchAllTasks() {
-    return this.http.get<Task[]>(`${environment.baseUrl}/all-tasks/`, { headers: this.httpHeaders })
-      .pipe(catchError((error) => {
-        console.log(error);
-        return throwError(() => new Error('Something went wrong fetching the all Tasks'))
-      }))
-  }
+  
 }

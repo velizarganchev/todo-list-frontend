@@ -14,12 +14,6 @@ import { TasksService } from './tasks-service/tasks.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'Join';
-
-  private tskService = inject(TasksService);
-
-  ngOnInit(): void {
-    this.tskService.setAllTasks();
-  }
 }

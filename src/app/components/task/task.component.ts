@@ -1,4 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, input, OnInit } from '@angular/core';
+import { TasksService } from '../../tasks-service/tasks.service';
+import { Task } from '../../models/task.class';
 
 @Component({
   selector: 'app-task',
@@ -7,18 +9,31 @@ import { Component, Input } from '@angular/core';
   templateUrl: './task.component.html',
   styleUrl: './task.component.scss'
 })
-export class TaskComponent {
+export class TaskComponent implements OnInit {
 
-  @Input() cardId: string = '';
-  @Input() task: any;
+  taskId = input<number>();
+  tskService = inject(TasksService);
+  task?: Task;
 
-  currentDraggedElement: string = '';
+  currentDraggedElement?: number;
 
-  startDragging(id: string) {
+  ngOnInit(): void {
+    this.task = this.tskService.loadedTasks()?.find(ts => ts.id === this.taskId());
+  }
+
+  startDragging(id?: number) {
     this.currentDraggedElement = id;
   }
 
-  openTask() {
-    console.log('Task opened:', this.cardId);
+  onAddTask() {
+    console.log('Task opened:', this.task);
+    const data = this.task;
+    this.tskService.addTask(data!).subscribe({
+      next: (res) => console.log(res),
+
+    });
+    console.log(this.tskService.loadedTasks());
+
   }
+
 }
