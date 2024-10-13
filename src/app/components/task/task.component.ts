@@ -7,10 +7,9 @@ import { Task } from '../../models/task.class';
   standalone: true,
   imports: [],
   templateUrl: './task.component.html',
-  styleUrl: './task.component.scss'
+  styleUrl: './task.component.scss',
 })
 export class TaskComponent implements OnInit {
-
   taskId = input<number>();
   tskService = inject(TasksService);
   task?: Task;
@@ -18,7 +17,9 @@ export class TaskComponent implements OnInit {
   currentDraggedElement?: number;
 
   ngOnInit(): void {
-    this.task = this.tskService.loadedTasks()?.find(ts => ts.id === this.taskId());
+    this.task = this.tskService
+      .loadedTasks()
+      ?.find((ts) => ts.id === this.taskId());
   }
 
   startDragging(id?: number) {
@@ -29,11 +30,7 @@ export class TaskComponent implements OnInit {
     console.log('Task opened:', this.task);
     const data = this.task;
     this.tskService.addTask(data!).subscribe({
-      next: (res) => console.log(res),
-
+      next: (res) => console.log('RESPONSE TASK COMPONENT', res),
     });
-    console.log(this.tskService.loadedTasks());
-
   }
-
 }

@@ -7,7 +7,7 @@ import { lastValueFrom, Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class UsersService {
-  url = `${environment.baseUrl}auth/`;
+  url = `${environment.baseUrl}/auth/`;
 
   constructor(private http: HttpClient) { }
 
