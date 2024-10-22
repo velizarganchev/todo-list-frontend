@@ -26,11 +26,11 @@ export class TaskComponent implements OnInit {
     this.currentDraggedElement = id;
   }
 
-  onAddTask() {
-    console.log('Task opened:', this.task);
-    const data = this.task;
-    this.tskService.addTask(data!).subscribe({
-      next: (res) => console.log('RESPONSE TASK COMPONENT', res),
-    });
-  }
+  // onAddTask() {
+  //   console.log('Task opened:', this.task);
+  //   const data = this.task;
+  //   this.tskService.addTask(data!).subscribe({
+  //     next: (res) => console.log('RESPONSE TASK COMPONENT', res),
+  //   });
+  // }
 }

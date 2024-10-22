@@ -5,11 +5,12 @@ import {
   inject,
   OnInit,
   Renderer2,
-  signal
-} from '@angular/core';;
+  signal,
+} from '@angular/core';
 
 import { TasksService } from '../../tasks-service/tasks.service';
-import { TaskComponent } from "../task/task.component";
+import { TaskComponent } from '../task/task.component';
+import { filter } from 'rxjs';
 import { Task } from '../../models/task.class';
 
 @Component({
@@ -18,9 +19,8 @@ import { Task } from '../../models/task.class';
   imports: [TaskComponent],
   providers: [],
   templateUrl: './board.component.html',
-  styleUrl: './board.component.scss'
+  styleUrl: './board.component.scss',
 })
-
 export class BoardComponent implements OnInit {
   error = signal('');
   isFetching = signal(false);
@@ -30,7 +30,7 @@ export class BoardComponent implements OnInit {
 
   tasks = this.tskService.loadedTasks;
 
-  constructor(private renderer: Renderer2, private el: ElementRef) { }
+  constructor(private renderer: Renderer2, private el: ElementRef) {}
 
   ngOnInit(): void {
     this.isFetching.set(true);
@@ -46,11 +46,15 @@ export class BoardComponent implements OnInit {
 
     this.destroyRef.onDestroy(() => {
       sub.unsubscribe();
-    })
+    });
   }
 
   openAddTask(status: string) {
     console.log(status);
+  }
+
+  getTaskByStatus(status: string): Task[] | undefined {
+    return this.tasks()?.filter((task) => task.status === status);
   }
 
   allowDrop(event: DragEvent) {
