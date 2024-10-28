@@ -1,184 +1,119 @@
 <section>
   <h1 class="add-task-headline">Add Task</h1>
-  <div class="form-wraper">
-    <form>
-      <div class="content-container">
-        <div class="content-left">
-          <div id="content-title">
-            <div class="subheadline">
-              <div>Title</div>
-              <div class="star">*</div>
-            </div>
-            <div class="subcontent">
-              <input required class="inputfield" placeholder="Enter a title" />
-            </div>
+  <form>
+    <div class="content-container">
+      <div class="content-left">
+        <div id="content-title">
+          <div class="subheadline">
+            <div>Title</div>
+            <div class="star">*</div>
           </div>
-          <div class="content-description">
-            <div class="subheadline">
-              <div>Description</div>
-            </div>
-            <div class="subcontent">
-              <textarea
-                id="description"
-                class="inputfield textarea"
-                placeholder="Enter a description"
-              ></textarea>
-            </div>
+          <div class="subcontent">
+            <input required class="inputfield" placeholder="Enter a title" />
           </div>
-          <div>
-            <div class="subheadline">
-              <div>Assigned to</div>
+        </div>
+        <div class="content-description">
+          <div class="subheadline">
+            <div>Description</div>
+          </div>
+          <div class="subcontent">
+            <textarea id="description" class="inputfield textarea" placeholder="Enter a description"></textarea>
+          </div>
+        </div>
+        <app-multi-select-dropdown [list]="list" />
+
+        <!-- <div>
+          <div class="subheadline">
+            <div>Assigned to</div>
+          </div>
+          <div class="subcontent">
+            <select class="inputfield hover">
+              <option value="" disabled selected>Select contacts to assign</option>
+              <option value="1">Contact 1</option>
+              <option value="2">Contact 2</option>
+              <option value="2">Contact 3</option>
+              <option value="2">Contact 4</option>
+            </select>
+          </div>
+        </div> -->
+      </div>
+      <div class="separator-line-container">
+        <div class="separator-line"></div>
+      </div>
+      <div class="content-right">
+        <div>
+          <div class="subheadline">
+            <div>Due date</div>
+            <div class="star">*</div>
+          </div>
+          <div class="subcontent">
+            <input required type="date" class="inputfield hover" min="todaydate" pattern="" />
+          </div>
+        </div>
+        <div>
+          <div class="subheadline">
+            <div>Prio</div>
+          </div>
+          <div class="sub-content-prio">
+            <div class="prio-class hover" onclick="choosePrio(1)">
+              <div>Urgent</div>
+              <img src="/assets/img/PrioHigh.png" />
             </div>
-            <div class="subcontent">
-              <div
-                class="assigned-to-container-input"
-                onclick="getAllContacts('assignedToSelect')"
-              >
-                <input
-                  id="assignedToSelect"
-                  class="selection hover arrowdown"
-                  autocomplete="off"
-                  placeholder="Select contacts to assign"
-                  onkeyup="filterContacts()"
-                /><img
-                  id="assignedToImg"
-                  class="arrow"
-                  src="/assets/img/arrow_up.png"
-                />
-              </div>
-              <!-- <div id="ContainerForAllPossibleContacts"
-                                class="ContainerForAllPossibleContacts hover d-none">
-
-                            </div>
-                            <div id="ContainerForAllChosenContacts" class="ContainerForAllChosenContacts d-none">
-                            </div>
-
-                            <div id="overlayContacts" class="overlay d-none" onclick="closecontacts()"></div> -->
+            <div class="prio-class hover" onclick="choosePrio(2)">
+              <div>Medium</div>
+              <img src="/assets/img/PrioMedium.png" />
+            </div>
+            <div class="prio-class hover" onclick="choosePrio(3)">
+              <div>Low</div>
+              <img src="/assets/img/PrioLow.png" />
             </div>
           </div>
         </div>
-        <!-- <svg
-          xmlns="http://www.w3.org/200 0/svg"
-          width="2"
-          height="426"
-          viewBox="0 0 2 426"
-          fill="none"
-        >
-          <path
-            d="M1.24805 1L1.24854 425"
-            stroke="#D1D1D1"
-            stroke-linecap="round"
-          />
-        </svg> -->
-        <div class="content-right">
-          <div>
-            <div class="subheadline">
-              <div>Due date</div>
-              <div class="star">*</div>
-            </div>
-            <div class="subcontent">
-              <div class="date-container hover">
-                <input
-                  required
-                  type="date"
-                  class="inputfield hover"
-                  min="todaydate"
-                  pattern=""
-                />
-              </div>
-            </div>
+        <div>
+          <div class="subheadline">
+            <div>Category</div>
+            <div class="star">*</div>
           </div>
-          <div>
-            <div class="subheadline">
-              <div>Prio</div>
-            </div>
-            <div class="sub-content-prio">
-              <div class="prio-class hover" onclick="choosePrio(1)">
-                <div>Urgent</div>
-                <img src="/assets/img/PrioHigh.png" />
-              </div>
-              <div class="prio-class hover" onclick="choosePrio(2)">
-                <div>Medium</div>
-                <img src="/assets/img/PrioMedium.png" />
-              </div>
-              <div class="prio-class hover" onclick="choosePrio(3)">
-                <div>Low</div>
-                <img src="/assets/img/PrioLow.png" />
-              </div>
-            </div>
+          <div class="subcontent">
+            <select class="inputfield hover">
+              <option value="1">Technical Task</option>
+              <option value="2">User Story</option>
+            </select>
           </div>
-          <div>
-            <div class="subheadline">
-              <div>Category</div>
-              <div class="star">*</div>
-            </div>
-            <div class="subcontent">
-              <select>
-                <option value="1">Technical Task</option>
-                <option value="2">User Story</option>
-              </select>
-              <!-- <div id="CategoryInputContainer" class="CategoryInputContainer hover"
-                                onclick="getAllCategories(id)">
-                                <div id="Category" class="simulateSelectElement">Select task category</div>
-                            </div> -->
-              <!-- <div id="categories" class="categories d-none">
-                                <div class="category hover" onclick="setCategory('Technical Task')">Technical Task</div>
-                                <div class="category category2 hover" onclick="setCategory('User Story')">User Story
-                                </div>
-                            </div>
-                            <div id="overlayCategories" class="overlay d-none" onclick="closeOverlayCategories()"></div> -->
-            </div>
-          </div>
-          <div id="subtasks-content">
-            <div class="subheadline">Subtasks</div>
-            <div class="subcontent">
-              <div class="subtask-input">
-                <input
-                  class="input-field subtasks"
-                  autocomplete="off"
-                  placeholder="Add new subtask"
-                />
-                <div class="subtasks-imgages-container">
-                  <img class="subtask-img" src="/assets/img/+.png" />
-                  <img
-                    class="subtask-img d-none"
-                    src="/assets/img/cancel_dark.png"
-                    onclick="cancelSubtask()"
-                  />
-                  <div class="d-none vertical-line"></div>
-                  <img
-                    class="subtask-img d-none"
-                    style="width: 15px; height: 15px"
-                    src="/assets/img/hook-icon-black.png"
-                    onclick="addSubtask()"
-                  />
-                </div>
+        </div>
+        <div id="subtasks-content">
+          <div class="subheadline">Subtasks</div>
+          <div class="subcontent">
+            <div class="subtask-input">
+              <input class="input-field subtasks" autocomplete="off" placeholder="Add new subtask" />
+              <div class="subtasks-imgages-container">
+                <img class="subtask-img" src="/assets/img/+.png" />
+                <img class="subtask-img d-none" src="/assets/img/cancel_dark.png" onclick="cancelSubtask()" />
+                <div class="d-none vertical-line"></div>
+                <img class="subtask-img d-none" style="width: 15px; height: 15px" src="/assets/img/hook-icon-black.png"
+                  onclick="addSubtask()" />
               </div>
-              <div>
-                <ul class="subtask-list" style="overflow: hidden"></ul>
-              </div>
+            </div>
+            <div>
+              <ul class="subtask-list" style="overflow: hidden"></ul>
             </div>
           </div>
         </div>
       </div>
-      <div class="buttons-and-info-text">
-        <div class="required-text">
-          <div class="star">*</div>
-          This field is required
-        </div>
-        <div id="buttons" class="buttons">
-          <button
-            type="reset"
-            class="cancel-button hover"
-            onclick="resetPrio()"
-          >
-            Clear <img src="/assets/img/cancel_dark.png" />
-          </button>
-          <button class="create-task-button hover">
-            Create Task <img src="/assets/img/confirm.png" />
-          </button>
-        </div>
+    </div>
+    <div class="buttons-and-info-text">
+      <div class="required-text">
+        <div class="star">*</div>
+        This field is required
       </div>
-    </form>
-  </div>
+      <div id="buttons" class="buttons">
+        <button type="reset" class="cancel-button hover" onclick="resetPrio()">
+          Clear <img src="/assets/img/cancel_dark.png" />
+        </button>
+        <button class="create-task-button hover">
+          Create Task <img src="/assets/img/confirm.png" />
+        </button>
+      </div>
+    </div>
+  </form>
 </section>

@@ -1,0 +1,49 @@
+.drop-toggle-wraper {
+    position: relative;
+}
+
+.drop-toggle {
+    font-size: 20px;
+    background-color: #fff;
+    border: none;
+    padding: 12px 21px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    width: 100%;
+    // text-align: left;
+}
+
+.drop-show {
+    padding: 4px;
+    width: 98%;
+    background-color: #FFF;
+    border-radius: 10px;
+    border: 1px solid #BABABA;
+    position: absolute;
+    z-index: 100;
+    -webkit-box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.drop-show label {
+    display: block;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.drop-show label input {
+    vertical-align: top;
+}
+
+.drop-show label span {
+    display: inline-block;
+}
+
+.checked-contact {
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    gap: 12px;
+}

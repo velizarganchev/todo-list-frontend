@@ -1,9 +1,4 @@
-<div
-  class="card-container"
-  draggable="true"
-  (dragstart)="startDragging(taskId())"
-  id="cardId"
->
+<div class="card-container" draggable="true" (dragstart)="startDragging(taskId())" id="cardId">
   <div class="card">
     <button class="card-label">{{ task?.category }}</button>
     <h3 class="card-title">{{ task?.title }}</h3>
@@ -13,7 +8,7 @@
       <div class="progress-bar">
         <div class="progress-done" id="'progress' + task.id"></div>
       </div>
-      <p class="subtasks-container">Subtasks Progress/4 Subtasks</p>
+      <p class="subtasks-container">1/4 Subtasks</p>
     </div>
 
     <div class="card-footer">

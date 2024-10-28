@@ -1,0 +1,20 @@
+<div>
+    <div class="drop-toggle-wraper" (mouseleave)="showDropDown = false">
+        <button class="drop-toggle btn flat" (click)="showDropDown=!showDropDown">
+            <span>Select contacts to assign</span>
+        </button>
+        <div class="drop-show" *ngIf="showDropDown">
+            <label *ngFor="let a of list">
+                <span>{{a.name}}</span>
+                <input type="checkbox" [(ngModel)]="a.checked" (change)="getSelectedValue(a.checked,a.name)" />
+            </label>
+        </div>
+    </div>
+    @if (checkedList.length>0) {
+    <div class="checked-contact">
+        @for (contact of checkedList; track $index) {
+        <span>{{ contact }}</span>
+        }
+    </div>
+    }
+</div>
