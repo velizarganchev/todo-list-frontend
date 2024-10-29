@@ -10,7 +10,6 @@ import {
 
 import { TasksService } from '../../tasks-service/tasks.service';
 import { TaskComponent } from '../task/task.component';
-import { filter } from 'rxjs';
 import { Task } from '../../models/task.class';
 
 @Component({
