@@ -41,10 +41,6 @@ body {
   @include scrollbar();
 }
 
-.cdk-overlay-pane.mat-mdc-dialog-panel {
-  width: 70% !important;
-}
-
 .disabled-button {
   opacity: 0.8;
   pointer-events: none;
