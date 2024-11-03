@@ -11,105 +11,106 @@
           <input required class="inputfield" placeholder="Enter a title" />
         </div>
         <div class="content-description">
-          <label for="description">Description</label>
-          <textarea
-            id="description"
-            class="description-input"
-            placeholder="Enter a description"
-          ></textarea>
+          <label for="description-title">Description</label>
+          <textarea name="description" rows="3"></textarea>
         </div>
         <app-multi-select-dropdown [list]="list" />
       </div>
       <div class="separator-line"></div>
       <div class="content-right">
-        <div>
-          <div class="subheadline">
-            <div>Due date</div>
+        <div class="date-container">
+          <div class="date-input-headline">
+            <label for="date">Due date</label>
             <div class="star">*</div>
           </div>
-          <div class="subcontent">
-            <input
-              required
-              type="date"
-              class="inputfield hover"
-              min="todaydate"
-              pattern=""
-            />
-          </div>
+          <input required type="date" class="inputfield" min="todaydate" />
         </div>
-        <div>
-          <div class="subheadline">
-            <div>Prio</div>
-          </div>
-          <div class="sub-content-prio">
-            <div class="prio-class hover" onclick="choosePrio(1)">
-              <div>Urgent</div>
+        <div class="prio-container">
+          <div class="prio-headline">Prio</div>
+          <div class="prio-content-container">
+            <div class="prio-item" onclick="choosePrio(1)">
+              <div class="prio-item-headline">Urgent</div>
               <img src="/assets/img/PrioHigh.png" />
             </div>
-            <div class="prio-class hover" onclick="choosePrio(2)">
-              <div>Medium</div>
+            <div class="prio-item hover" onclick="choosePrio(2)">
+              <div class="prio-item-headline">Medium</div>
               <img src="/assets/img/PrioMedium.png" />
             </div>
-            <div class="prio-class hover" onclick="choosePrio(3)">
-              <div>Low</div>
+            <div class="prio-item hover" onclick="choosePrio(3)">
+              <div class="prio-item-headline">Low</div>
               <img src="/assets/img/PrioLow.png" />
             </div>
           </div>
         </div>
-        <div>
-          <div class="subheadline">
-            <div>Category</div>
+        <div class="category-container">
+          <div class="category-input-headline">
+            <label for="category">Category</label>
             <div class="star">*</div>
           </div>
-          <div class="subcontent">
-            <select class="inputfield hover">
-              <option value="1">Technical Task</option>
-              <option value="2">User Story</option>
-            </select>
-          </div>
+          <select class="inputfield">
+            <option value="1">Technical Task</option>
+            <option value="2">User Story</option>
+          </select>
         </div>
-        <div id="subtasks-content">
-          <div class="subheadline">Subtasks</div>
-          <div class="subcontent">
+        <div class="subtasks-container">
+          <div class="subtask-headline">Subtasks</div>
+          <div class="subtask-content">
             <div class="subtask-input">
-              <input
-                class="input-field subtasks"
-                autocomplete="off"
-                placeholder="Add new subtask"
-              />
+              <input autocomplete="off" placeholder="Add new subtask" />
               <div class="subtasks-imgages-container">
-                <img class="subtask-img" src="/assets/img/+.png" />
-                <img
-                  class="subtask-img d-none"
-                  src="/assets/img/cancel_dark.png"
-                  onclick="cancelSubtask()"
-                />
-                <div class="d-none vertical-line"></div>
-                <img
-                  class="subtask-img d-none"
-                  style="width: 15px; height: 15px"
-                  src="/assets/img/hook-icon-black.png"
-                  onclick="addSubtask()"
-                />
+                <div class="subtask-img">
+                  <img src="/assets/img/+.png" />
+                </div>
+                <div class="subtask-img-add-or-cancel-container">
+                  <div class="subtask-img">
+                    <img src="/assets/img/cancel_dark.png" />
+                  </div>
+                  <div class="subtask-img">
+                    <img style="width: 15px; height: 15px" src="/assets/img/hook-icon-black.png" />
+                  </div>
+                </div>
               </div>
             </div>
-            <div>
-              <ul class="subtask-list" style="overflow: hidden"></ul>
+            <div class="subtask-list-container">
+              <ul class="subtask-list">
+                <li class="subtask-list-item">
+                  <span>Subtask</span>
+                  <div class="subtask-list-item-actions-container">
+                    <button class="subtask-edit-btn-container">
+                      <img src="assets/img/edit-contact.png" alt="Edit">
+                    </button>
+                    <button class="subtask-delete-btn-container">
+                      <img src="assets/img/delete-contact.png" alt="Delete">
+                    </button>
+                  </div>
+                </li>
+                <li class="subtask-list-item">
+                  <span>Subtask</span>
+                  <div class="subtask-list-item-actions-container">
+                    <button class="subtask-edit-btn-container">
+                      <img src="assets/img/edit-contact.png" alt="Edit">
+                    </button>
+                    <button class="subtask-delete-btn-container">
+                      <img src="assets/img/delete-contact.png" alt="Delete">
+                    </button>
+                  </div>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="buttons-and-info-text">
-      <div class="required-text">
+      <div class="required-text-container">
         <div class="star">*</div>
-        This field is required
+        <span>This field is required</span>
       </div>
-      <div id="buttons" class="buttons">
-        <button type="reset" class="cancel-button hover" onclick="resetPrio()">
+      <div class="buttons-container">
+        <button type="reset" class="cancel-button" onclick="resetPrio()">
           Clear <img src="/assets/img/cancel_dark.png" />
         </button>
-        <button class="create-task-button hover">
+        <button class="create-task-button">
           Create Task <img src="/assets/img/confirm.png" />
         </button>
       </div>

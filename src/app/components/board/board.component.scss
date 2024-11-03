@@ -2,7 +2,6 @@
 
 .main-board {
     padding: 18px;
-    height: calc(100dvh - 130px);
     @include scrollbar();
 
     .board-header {
@@ -192,9 +191,7 @@
 
 .board-distribution-container {
     width: 100%;
-    height: calc(100dvh - 200px);
-    overflow-y: scroll;
-    @include scrollbar();
+    height: calc(100dvh - 12rem);
     margin-top: 1.25rem;
     margin-bottom: 7.5rem;
     display: grid;
@@ -206,9 +203,6 @@
     }
 
     .responsive-board-nav-item-container {
-        height: calc(100dvh - 230px);
-        overflow-y: scroll;
-        @include scrollbar();
         display: flex;
         flex-direction: column;
         align-items: center;

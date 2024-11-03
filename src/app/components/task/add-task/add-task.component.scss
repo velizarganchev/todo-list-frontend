@@ -1,24 +1,44 @@
+input,
+textarea,
+select {
+  font-size: 1.3rem;
+  padding: 12px 21px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  font-family: inherit;
+}
+
+textarea {
+  resize: none;
+}
+
 section {
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: center;
-  margin: 0 7rem;
+  justify-content: flex-start;
+  gap: 1rem;
+  margin: 1rem 7rem 1rem 7rem;
+  background: inherit;
 
   .add-task-headline {
     font-size: 3rem;
+    margin: 0.5rem 0;
   }
 
   form {
     width: 100%;
     display: flex;
     flex-direction: column;
+    gap: 2rem;
 
     .content-container {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      gap: 35px;
+      gap: 1rem;
 
       .content-left,
       .content-right {
@@ -35,16 +55,13 @@ section {
         .content-description {
           display: flex;
           flex-direction: column;
-          gap: 8px;
+          gap: 0.5rem;
         }
+
         .title-container {
+
           .title-input-headline {
             display: flex;
-            h4 {
-              margin: 0;
-              font-size: 1rem;
-              font-weight: 400;
-            }
 
             .star {
               color: red;
@@ -53,28 +70,235 @@ section {
         }
 
         .content-description {
+          display: flex;
+          flex-direction: column;
         }
       }
 
       .separator-line {
         width: 1px;
-        height: 350px;
+        height: 100%;
         background-color: rgb(228, 228, 228);
       }
 
       .content-right {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 1rem;
+
+        .date-container {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+
+          .date-input-headline {
+            display: flex;
+
+            .star {
+              color: red;
+            }
+          }
+        }
+
+        .prio-container {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+
+          .prio-headline {}
+
+          .prio-content-container {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.6rem;
+
+            .prio-item {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              flex-grow: 1;
+              flex-shrink: 0;
+              flex-basis: 0;
+              padding: 1rem 0.6rem;
+              font-size: 1.3rem;
+              gap: 1rem;
+              border-radius: 10px;
+              box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.10);
+              background-color: white;
+
+              :hover {
+                cursor: pointer;
+              }
+            }
+          }
+        }
+
+        .category-container {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+
+          .category-input-headline {
+            display: flex;
+
+            .star {
+              color: red;
+
+            }
+          }
+
+          select {
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            appearance: none;
+          }
+        }
+
+        .subtasks-container {
+
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+
+          .subtask-headline {}
+
+          .subtask-content {
+
+            .subtask-input {
+              font-size: 1.3rem;
+              padding: 12px 21px;
+              border-radius: 10px;
+              cursor: pointer;
+              border: 1px solid #ccc;
+              font-family: inherit;
+              display: flex;
+              justify-content: space-between;
+              background: white;
+
+              input {
+                border: none;
+                padding: 0;
+
+                &:focus-visible {
+                  outline: none;
+                }
+              }
+
+              .subtasks-imgages-container {
+                display: flex;
+                align-items: center;
+              }
+
+              .subtask-img-add-or-cancel-container {
+                display: flex;
+                align-items: center;
+                display: none;
+              }
+            }
+
+            .subtask-list-container {
+              display: flex;
+              flex-direction: column;
+
+              .subtask-list {
+                list-style: none;
+                display: flex;
+                flex-direction: column;
+
+                .subtask-list-item {
+                  width: 100%;
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+
+                  .subtask-list-item-actions-container {
+                    display: flex;
+                    gap: 0.5rem;
+
+                    button {
+                      margin: 0;
+                      padding: 0.2rem;
+                      border: none;
+                      background-color: transparent;
+
+                      &:hover {
+                        outline: none;
+                        cursor: pointer;
+                        background-color: rgb(210, 210, 210);
+                        border-radius: 10px;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
-  }
-}
 
-input,
-textarea,
-select {
-  font-size: 1.3rem;
-  padding: 12px 21px;
-  border-radius: 10px;
-  cursor: pointer;
-  border: 1px solid #ccc;
-  font-family: inter, sans-serif;
+    .buttons-and-info-text {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+
+      .required-text-container {
+        display: flex;
+
+        .star {
+          color: red;
+        }
+      }
+
+      .buttons-container {
+        display: flex;
+        gap: 1rem;
+
+        .cancel-button {
+          display: flex;
+          padding: 16px;
+          justify-content: center;
+          align-items: center;
+          gap: 4px;
+          border-radius: 10px;
+          border: 1px solid var(--Version-2-main-color, #2A3647);
+          background: #F6F7F8;
+          color: var(--Version-2-main-color, #2A3647);
+          font-family: 'Inter', sans-serif;
+          font-size: 20px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 120%;
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+
+        .create-task-button {
+          display: flex;
+          padding: 16px;
+          justify-content: center;
+          align-items: center;
+          gap: 4px;
+          border-radius: 10px;
+          background: #2A3647;
+          color: #FFF;
+          font-family: 'Inter', sans-serif;
+          font-size: 21px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 120%;
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+
+    }
+  }
 }
