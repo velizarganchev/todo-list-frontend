@@ -1,15 +1,15 @@
 import { Component, inject, input, OnInit } from '@angular/core';
-import { TasksService } from '../../tasks-service/tasks.service';
-import { Task } from '../../models/task.class';
+import { Task } from '../../../models/task.class';
+import { TasksService } from '../../../services/tasks/tasks.service';
 
 @Component({
-  selector: 'app-task',
+  selector: 'app-task-card',
   standalone: true,
   imports: [],
-  templateUrl: './task.component.html',
-  styleUrl: './task.component.scss',
+  templateUrl: './task-card.component.html',
+  styleUrl: './task-card.component.scss'
 })
-export class TaskComponent implements OnInit {
+export class TaskCardComponent implements OnInit {
   taskId = input<number>();
   tskService = inject(TasksService);
   task?: Task;

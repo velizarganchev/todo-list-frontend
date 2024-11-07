@@ -1,9 +1,9 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { Task } from '../models/task.class';
+import { Task } from '../../models/task.class';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 import { catchError, tap, throwError } from 'rxjs';
-import { ErrorService } from '../components/shared/error.service';
+import { ErrorService } from '../../components/shared/error.service';
 
 @Injectable({
   providedIn: 'root',

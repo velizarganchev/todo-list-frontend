@@ -1,19 +1,23 @@
+import { Task } from "./task.class";
+
 export class Subtask {
     id: number;
     title: string;
     status: string;
+    task: Task | null;
 
     constructor(obj?: any) {
-        this.id = obj && obj.id ? obj.id : null;
-        this.title = obj && obj.title ? obj.title : '';
-        this.status = obj && obj.status ? obj.status : '';
+        this.id = obj?.id ?? null;
+        this.title = obj?.title ?? '';
+        this.status = obj?.status ?? '';
+        this.task = obj?.task ?? null;
     }
 
-    toJson() {
-        return {
-            id: this.id,
-            title: this.title,
-            status: this.status,
-        };
-    }
+    // toJson() {
+    //     return {
+    //         id: this.id,
+    //         title: this.title,
+    //         status: this.status,
+    //     };
+    // }
 }

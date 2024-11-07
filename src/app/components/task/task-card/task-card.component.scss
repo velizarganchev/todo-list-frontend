@@ -1,0 +1,124 @@
+.card-container {
+    min-height: fit-content;
+    padding: 16px;
+    background-color: white;
+    border: none;
+    border-radius: 24px;
+    cursor: pointer;
+    box-shadow: 0 2px 10px 0 #00000014;
+
+    @media (max-width: 1270px) {
+        min-width: 20rem;
+    }
+
+    .card {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+
+        .card-label {
+            width: fit-content;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 19.2px;
+            padding: 4px 16px;
+            color: #ffffff;
+            background-color: #0038ff;
+            border: none;
+            border-radius: 8px;
+        }
+
+        .card-title {
+            color: #2a3647;
+            width: fit-content;
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 19.2px;
+        }
+
+        .card-content {
+            color: #a8a8a8;
+            width: fit-content;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 19.2px;
+        }
+
+        .progress-bar-container {
+            width: fit-content;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+
+            .progress-bar {
+                width: 128px;
+                height: 8px;
+                background-color: #f4f4f4;
+                border: none;
+                border-radius: 8px;
+
+                @media (max-width: 1400px) {
+                    width: 100px;
+                }
+
+                .progress-done {
+                    height: 100%;
+                    width: 0%;
+                    background-color: #4589ff;
+                    border: none;
+                    border-radius: 8px;
+                    transition: 1s ease 0.3s;
+                }
+            }
+
+            .subtasks-container {
+                color: #000000;
+                font-size: 12px;
+                font-weight: 400;
+                line-height: 14.4px;
+            }
+        }
+
+        .card-footer {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .profiles {
+                display: flex;
+                flex-wrap: wrap;
+
+                .profile {
+                    display: inline-block;
+                    text-align: center;
+                    color: #ffffff;
+                    background-color: #6e52ff;
+                    width: 32px;
+                    height: 32px;
+                    font-size: 12px;
+                    font-weight: 400;
+                    line-height: 32px;
+                    border-radius: 45%;
+                    margin-left: -5px;
+
+                    &:first-child {
+                        margin: 0;
+                    }
+                }
+            }
+
+            .priority-container {
+                display: flex;
+                align-items: center;
+                height: 32px;
+
+                img {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}

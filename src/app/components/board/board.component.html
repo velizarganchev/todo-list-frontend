@@ -71,7 +71,7 @@
         (dragover)="allowDrop($event); highlight('todo')"
       >
         @for (task of getTaskByStatus('todo'); track $index) {
-        <app-task [taskId]="task.id" />
+        <app-task-card [taskId]="task.id" />
         }
       </div>
     </div>
@@ -91,7 +91,7 @@
         (dragover)="allowDrop($event); highlight('in-progress')"
       >
         @for (task of getTaskByStatus('in_progress'); track $index) {
-        <app-task [taskId]="task.id" />
+        <app-task-card [taskId]="task.id" />
         }
       </div>
     </div>
@@ -111,7 +111,7 @@
         (dragover)="allowDrop($event); highlight('await-feedback')"
       >
         @for (task of getTaskByStatus('await_feedback'); track $index) {
-        <app-task [taskId]="task.id" />
+        <app-task-card [taskId]="task.id" />
         }
       </div>
     </div>
@@ -128,7 +128,7 @@
         (dragover)="allowDrop($event); highlight('done')"
       >
         @for (task of getTaskByStatus('done'); track $index) {
-        <app-task [taskId]="task.id" />
+        <app-task-card [taskId]="task.id" />
         }
       </div>
     </div>

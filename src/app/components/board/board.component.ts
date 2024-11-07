@@ -8,14 +8,14 @@ import {
   signal,
 } from '@angular/core';
 
-import { TasksService } from '../../tasks-service/tasks.service';
-import { TaskComponent } from '../task/task.component';
+import { TasksService } from '../../services/tasks/tasks.service';
 import { Task } from '../../models/task.class';
+import { TaskCardComponent } from "../task/task-card/task-card.component";
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [TaskComponent],
+  imports: [TaskCardComponent],
   providers: [],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',
@@ -29,7 +29,7 @@ export class BoardComponent implements OnInit {
 
   tasks = this.tskService.loadedTasks;
 
-  constructor(private renderer: Renderer2, private el: ElementRef) {}
+  constructor(private renderer: Renderer2, private el: ElementRef) { }
 
   ngOnInit(): void {
     this.isFetching.set(true);
@@ -49,6 +49,8 @@ export class BoardComponent implements OnInit {
   }
 
   openAddTask(status: string) {
+    console.log(this.tasks());
+    
     console.log(status);
   }
 

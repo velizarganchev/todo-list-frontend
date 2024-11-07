@@ -1,6 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  DestroyRef,
+  EventEmitter,
+  inject,
+  OnInit,
+  Output,
+  signal,
+} from '@angular/core';
+
 import { FormsModule } from '@angular/forms';
+import { ContactsService } from '../../../services/contacts/contacts.service';
 
 @Component({
   selector: 'app-multi-select-dropdown',
@@ -9,9 +19,9 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './multi-select-dropdown.component.html',
   styleUrl: './multi-select-dropdown.component.scss'
 })
-export class MultiSelectDropdownComponent {
+export class MultiSelectDropdownComponent implements OnInit {
+  isFetching = signal(false);
   showDropDown = false;
-  @Input() list?: any[];
 
   @Output() shareCheckedList = new EventEmitter();
   // @Output() shareIndividualCheckedList = new EventEmitter();
@@ -19,19 +29,51 @@ export class MultiSelectDropdownComponent {
   checkedList: any[];
   currentSelected!: {};
 
+  private contactsService = inject(ContactsService);
+  destroyRef = inject(DestroyRef);
+
+  contacts: any;
+
   constructor() {
     this.checkedList = [];
   }
 
-  getSelectedValue(status: Boolean, value: String) {
+  ngOnInit(): void {
+    this.isFetching.set(true);
+
+    const sub = this.contactsService.loadAllContacts().subscribe({
+      next: (contacts) => {
+        this.contacts = contacts.map((member) => ({
+          firstName: member.first_name,
+          lastName: member.last_name,
+          color: member.color,
+          fullName: `${member.first_name} ${member.last_name}`,
+          checked: false
+        }));
+      },
+      complete: () => {
+        this.isFetching.set(false);
+      },
+    });
+
+    this.destroyRef.onDestroy(() => {
+      sub.unsubscribe();
+    });
+  }
+
+  onOpenDropDown() {
+    this.showDropDown = !this.showDropDown
+  }
+
+  getSelectedValue(status: Boolean, contact: any) {
     if (status) {
-      this.checkedList.push(value);
+      this.checkedList.push(contact);
     } else {
-      var index = this.checkedList.indexOf(value);
+      var index = this.checkedList.indexOf(contact);
       this.checkedList.splice(index, 1);
     }
 
-    this.currentSelected = { checked: status, name: value };
+    // this.currentSelected = { checked: status, name: contact.first_name };
 
     this.shareCheckedlist();
 

@@ -1,19 +1,24 @@
-<div>
+<div class="drop-toggle-wraper-container">
     <div class="drop-toggle-wraper" (mouseleave)="showDropDown = false">
-        <button class="drop-toggle btn flat" (click)="showDropDown=!showDropDown">
+        <button class="drop-toggle btn flat" (click)="onOpenDropDown()">
             <span>Select contacts to assign</span>
         </button>
         <div class="drop-show" *ngIf="showDropDown">
-            <label *ngFor="let a of list">
-                <span>{{a.name}}</span>
-                <input type="checkbox" [(ngModel)]="a.checked" (change)="getSelectedValue(a.checked,a.name)" />
+            <label *ngFor="let c of contacts">
+                <div class="drop-show-name-container">
+                    <span class="drop-show-badge" [style.background-color]="c.color">{{ c.firstName.charAt(0) }}{{
+                        c.lastName.charAt(0) }}</span>
+                    <span class="drop-show-name">{{ c.fullName }}</span>
+                </div>
+                <input type="checkbox" [(ngModel)]="c.checked" (change)="getSelectedValue(c.checked,c)" />
             </label>
         </div>
     </div>
     @if (checkedList.length>0) {
-    <div class="checked-contact">
+    <div class="checked-contact-container">
         @for (contact of checkedList; track $index) {
-        <span>{{ contact }}</span>
+        <span class="checked-contact" [style.background-color]="contact.color">{{ contact.firstName.charAt(0) }}{{
+            contact.lastName.charAt(0) }}</span>
         }
     </div>
     }
