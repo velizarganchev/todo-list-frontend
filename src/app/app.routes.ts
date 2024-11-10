@@ -6,13 +6,16 @@ import { AddTaskComponent } from './components/task/add-task/add-task.component'
 import { BoardComponent } from './components/board/board.component';
 import { ContactsComponent } from './components/contacts/contacts.component';
 import { SummeryComponent } from './components/summery/summery.component';
+import { loginGuard } from './components/auth/login.guard';
 
 export const routes: Routes = [
     {
         path: '',
-        pathMatch: 'full',
         component: HomeComponent,
+        canActivate: [loginGuard]
     },
+    { path: 'login', component: LoginComponent },
+    { path: 'sign-up', component: SignupComponent },
     {
         path: '',
         component: HomeComponent,
@@ -22,7 +25,5 @@ export const routes: Routes = [
             { path: 'add-task', component: AddTaskComponent },
             { path: 'contacts', component: ContactsComponent },
         ]
-    },
-    { path: 'login', component: LoginComponent },
-    { path: 'sign-up', component: SignupComponent },
+    }
 ];

@@ -1,4 +1,4 @@
-import {Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { MultiSelectDropdownComponent } from "../../shared/multi-select-dropdown/multi-select-dropdown.component";
 
 @Component({
@@ -9,17 +9,13 @@ import { MultiSelectDropdownComponent } from "../../shared/multi-select-dropdown
   styleUrl: './add-task.component.scss'
 })
 export class AddTaskComponent {
-
   name = 'Angular';
-  list: any[];
+  
 
-  constructor() {
-    this.list =
-      [
-        { name: 'India', checked: false },
-        { name: 'US', checked: false },
-        { name: 'China', checked: false },
-        { name: 'France', checked: false }
-      ]
+  constructor() { }
+
+  onHandleSelectedContacts(contacts: any) {
+    console.log(contacts);
+
   }
 }

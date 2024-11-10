@@ -14,12 +14,10 @@
             </label>
         </div>
     </div>
-    @if (checkedList.length>0) {
     <div class="checked-contact-container">
         @for (contact of checkedList; track $index) {
         <span class="checked-contact" [style.background-color]="contact.color">{{ contact.firstName.charAt(0) }}{{
             contact.lastName.charAt(0) }}</span>
         }
     </div>
-    }
 </div>

@@ -1,3 +1,9 @@
+.drop-toggle-wraper-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
 .drop-toggle-wraper {
     position: relative;
 }
@@ -69,10 +75,13 @@
 }
 
 .checked-contact-container {
-    width: 100%;
-    margin-top: 20px;
+    min-height: 3rem;
+    padding: 0.5rem;
     display: flex;
+    align-items: center;
     gap: 12px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
 
     .checked-contact {
         width: 2.5rem;

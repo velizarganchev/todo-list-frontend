@@ -24,10 +24,8 @@ export class MultiSelectDropdownComponent implements OnInit {
   showDropDown = false;
 
   @Output() shareCheckedList = new EventEmitter();
-  // @Output() shareIndividualCheckedList = new EventEmitter();
 
   checkedList: any[];
-  currentSelected!: {};
 
   private contactsService = inject(ContactsService);
   destroyRef = inject(DestroyRef);
@@ -56,7 +54,7 @@ export class MultiSelectDropdownComponent implements OnInit {
       },
     });
 
-    this.destroyRef.onDestroy(() => {
+    this.destroyRef.onDestroy(() => { 
       sub.unsubscribe();
     });
   }
@@ -73,19 +71,10 @@ export class MultiSelectDropdownComponent implements OnInit {
       this.checkedList.splice(index, 1);
     }
 
-    // this.currentSelected = { checked: status, name: contact.first_name };
-
     this.shareCheckedlist();
-
-    //share individual selected item
-    // this.shareIndividualStatus();
   }
 
   shareCheckedlist() {
     this.shareCheckedList.emit(this.checkedList);
   }
-
-  // shareIndividualStatus() {
-  //   this.shareIndividualCheckedList.emit(this.currentSelected);
-  // }
 }

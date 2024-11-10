@@ -14,7 +14,7 @@
           <label for="description-title">Description</label>
           <textarea name="description" rows="3"></textarea>
         </div>
-        <app-multi-select-dropdown />
+        <app-multi-select-dropdown (shareCheckedList)="onHandleSelectedContacts($event)" />
       </div>
       <div class="separator-line"></div>
       <div class="content-right">

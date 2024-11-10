@@ -50,6 +50,7 @@ section {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        gap: 1rem;
 
         .title-container,
         .content-description {
