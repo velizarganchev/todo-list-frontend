@@ -1,6 +1,6 @@
 <div class="drop-toggle-wraper-container">
-    <div class="drop-toggle-wraper" (mouseleave)="showDropDown = false">
-        <button class="drop-toggle btn flat" (click)="onOpenDropDown()">
+    <div class="drop-toggle-wraper" (mouseleave)="shareCheckedContacts()">
+        <button class="drop-toggle btn flat" type="button" (click)="onOpenDropDown()">
             <span>Select contacts to assign</span>
         </button>
         <div class="drop-show" *ngIf="showDropDown">

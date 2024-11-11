@@ -189,14 +189,20 @@ section {
               }
 
               .subtasks-imgages-container {
+                min-width: 2.5rem;
+                min-height: 1.5rem;
                 display: flex;
-                align-items: center;
-              }
+                align-items: stretch;
+                gap: 0.3rem;
 
-              .subtask-img-add-or-cancel-container {
-                display: flex;
-                align-items: center;
-                display: none;
+                .subtask-img {
+                  width: 1.5rem;
+                  height: 1.5rem;
+
+                  img {
+                    width: 100%;
+                  }
+                }
               }
             }
 

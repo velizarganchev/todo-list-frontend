@@ -1,6 +1,6 @@
 <section>
   <h1 class="add-task-headline">Add Task</h1>
-  <form>
+  <form [formGroup]="taskForm" (ngSubmit)="onCreateTask()">
     <div class="content-container">
       <div class="content-left">
         <div class="title-container">
@@ -8,13 +8,13 @@
             <label for="title">Title</label>
             <div class="star">*</div>
           </div>
-          <input required class="inputfield" placeholder="Enter a title" />
+          <input required class="inputfield" name="title" formControlName="title" placeholder="Enter a title" />
         </div>
         <div class="content-description">
           <label for="description-title">Description</label>
-          <textarea name="description" rows="3"></textarea>
+          <textarea name="description" formControlName="description" rows="3"></textarea>
         </div>
-        <app-multi-select-dropdown (shareCheckedList)="onHandleSelectedContacts($event)" />
+        <app-multi-select-dropdown appClickStopPropagation (shareCheckedList)="onHandleSelectedContacts($event)" />
       </div>
       <div class="separator-line"></div>
       <div class="content-right">
@@ -23,22 +23,37 @@
             <label for="date">Due date</label>
             <div class="star">*</div>
           </div>
-          <input required type="date" class="inputfield" min="todaydate" />
+          <input required formControlName="due_date" type="date" class="inputfield" min="todaydate" />
         </div>
         <div class="prio-container">
           <div class="prio-headline">Prio</div>
           <div class="prio-content-container">
-            <div class="prio-item" onclick="choosePrio(1)">
+            <div class="prio-item" [style]="bgColor === 'red' ? { background: bgColor} : null"
+              (click)="choosePrio('high')">
               <div class="prio-item-headline">Urgent</div>
+              @if (bgColor === 'red') {
+              <img src="/assets/img/PrioHighWhite.png" />
+              }@else {
               <img src="/assets/img/PrioHigh.png" />
+              }
             </div>
-            <div class="prio-item hover" onclick="choosePrio(2)">
+            <div class="prio-item hover" [style]="bgColor === 'orange' ? { background: bgColor} : null"
+              (click)="choosePrio('medium')">
               <div class="prio-item-headline">Medium</div>
+              @if (bgColor === 'orange') {
+              <img src="/assets/img/PrioMediumWhite.png" />
+              }@else {
               <img src="/assets/img/PrioMedium.png" />
+              }
             </div>
-            <div class="prio-item hover" onclick="choosePrio(3)">
+            <div class="prio-item hover" [style]="bgColor === 'limegreen' ? { background: 'limegreen'} : null"
+              (click)="choosePrio('low')">
               <div class="prio-item-headline">Low</div>
+              @if (bgColor === 'limegreen') {
+              <img src="/assets/img/PrioLowWhite.png" />
+              }@else {
               <img src="/assets/img/PrioLow.png" />
+              }
             </div>
           </div>
         </div>
@@ -47,45 +62,36 @@
             <label for="category">Category</label>
             <div class="star">*</div>
           </div>
-          <select class="inputfield">
-            <option value="1">Technical Task</option>
-            <option value="2">User Story</option>
+          <select class="inputfield" name="category" formControlName="category">
+            <option value="technical_task">Technical Task</option>
+            <option value="user_story">User Story</option>
           </select>
         </div>
         <div class="subtasks-container">
           <div class="subtask-headline">Subtasks</div>
           <div class="subtask-content">
             <div class="subtask-input">
-              <input autocomplete="off" placeholder="Add new subtask" />
+              <input autocomplete="off" name="subtask-input" placeholder="Add new subtask"
+                (click)="onTogleSubtaskIcons()" />
               <div class="subtasks-imgages-container">
+                @if (!showAddSubtaskIcons) {
                 <div class="subtask-img">
                   <img src="/assets/img/+.png" />
                 </div>
-                <div class="subtask-img-add-or-cancel-container">
-                  <div class="subtask-img">
-                    <img src="/assets/img/cancel_dark.png" />
-                  </div>
-                  <div class="subtask-img">
-                    <img style="width: 15px; height: 15px" src="/assets/img/hook-icon-black.png" />
-                  </div>
+                }@else if (showAddSubtaskIcons) {
+                <div class="subtask-img">
+                  <img src="/assets/img/cancel_dark.png" />
                 </div>
+                <div class="subtask-img" (click)="onAddSubtask()">
+                  <img style="width: 1rem; height: 1rem" src="/assets/img/hook-icon-black.png" />
+                </div>
+                }
               </div>
             </div>
             <div class="subtask-list-container">
-              <ul class="subtask-list">
+              <ul class="subtask-list" formArrayName="subtasks">
                 <li class="subtask-list-item">
-                  <span>Subtask</span>
-                  <div class="subtask-list-item-actions-container">
-                    <button class="subtask-edit-btn-container">
-                      <img src="assets/img/edit-contact.png" alt="Edit">
-                    </button>
-                    <button class="subtask-delete-btn-container">
-                      <img src="assets/img/delete-contact.png" alt="Delete">
-                    </button>
-                  </div>
-                </li>
-                <li class="subtask-list-item">
-                  <span>Subtask</span>
+                  <span>SubtaskTitle</span>
                   <div class="subtask-list-item-actions-container">
                     <button class="subtask-edit-btn-container">
                       <img src="assets/img/edit-contact.png" alt="Edit">

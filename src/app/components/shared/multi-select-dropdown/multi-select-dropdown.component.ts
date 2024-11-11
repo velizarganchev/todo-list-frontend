@@ -42,6 +42,7 @@ export class MultiSelectDropdownComponent implements OnInit {
     const sub = this.contactsService.loadAllContacts().subscribe({
       next: (contacts) => {
         this.contacts = contacts.map((member) => ({
+          id: member.id,
           firstName: member.first_name,
           lastName: member.last_name,
           color: member.color,
@@ -54,13 +55,13 @@ export class MultiSelectDropdownComponent implements OnInit {
       },
     });
 
-    this.destroyRef.onDestroy(() => { 
+    this.destroyRef.onDestroy(() => {
       sub.unsubscribe();
     });
   }
 
   onOpenDropDown() {
-    this.showDropDown = !this.showDropDown
+    this.showDropDown = !this.showDropDown;
   }
 
   getSelectedValue(status: Boolean, contact: any) {
@@ -70,11 +71,10 @@ export class MultiSelectDropdownComponent implements OnInit {
       var index = this.checkedList.indexOf(contact);
       this.checkedList.splice(index, 1);
     }
-
-    this.shareCheckedlist();
   }
 
-  shareCheckedlist() {
+  shareCheckedContacts() {
+    this.showDropDown = false;
     this.shareCheckedList.emit(this.checkedList);
   }
 }
